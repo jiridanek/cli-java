@@ -107,6 +107,7 @@ public class SenderClient extends CoreClient {
                     msgProducer.send(message);
                 } catch (Exception e) {
                     switch (e.getCause().getClass().getName()) {
+                        case "org.apache.qpid.jms.provider.exceptions.ProviderDeliveryModifiedException":
                         case "org.apache.qpid.jms.provider.exceptions.ProviderDeliveryReleasedException":
                             String onRelease = senderOptions.getOption(ClientOptions.ON_RELEASE).getValue();
                             LOG.trace(String.format("Message released [action: %s]", onRelease));
